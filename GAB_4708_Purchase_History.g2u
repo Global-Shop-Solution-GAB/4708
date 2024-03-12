@@ -1,0 +1,750 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.frmPOHist..Create
+Gui.frmPOHist..Caption("Purchase Order History")
+Gui.frmPOHist..Size(15330,10485)
+Gui.frmPOHist..MinX(0)
+Gui.frmPOHist..MinY(0)
+Gui.frmPOHist..Position(0,0)
+Gui.frmPOHist..BackColor(-2147483633)
+Gui.frmPOHist..MousePointer(0)
+Gui.frmPOHist..Event(UnLoad,frmPOHist_UnLoad)
+Gui.frmPOHist.GsGCPOHist.Create(GsGridControl)
+Gui.frmPOHist.GsGCPOHist.Size(15165,8580)
+Gui.frmPOHist.GsGCPOHist.Position(15,1515)
+Gui.frmPOHist.GsGCPOHist.Event(RowCellClick,GsGCPOHist_RowCellClick)
+Gui.frmPOHist.picGSSLogo.Create(PictureBox)
+Gui.frmPOHist.picGSSLogo.Size(4695,1305)
+Gui.frmPOHist.picGSSLogo.Position(5550,165)
+Gui.frmPOHist.picGSSLogo.Event(DblClick,picGSSLogo_DblClick)
+Gui.frmPOHist.frameDates.Create(Frame)
+Gui.frmPOHist.frameDates.Size(1545,1395)
+Gui.frmPOHist.frameDates.Position(15,30)
+Gui.frmPOHist.frameDates.Caption("Date Range")
+Gui.frmPOHist.dtpStartDt.Create(DatePicker)
+Gui.frmPOHist.dtpStartDt.Size(1470,285)
+Gui.frmPOHist.dtpStartDt.Position(45,480)
+Gui.frmPOHist.dtpStartDt.Parent("frameDates")
+Gui.frmPOHist.dtpEndDt.Create(DatePicker)
+Gui.frmPOHist.dtpEndDt.Size(1470,285)
+Gui.frmPOHist.dtpEndDt.Position(45,1050)
+Gui.frmPOHist.dtpEndDt.Parent("frameDates")
+Gui.frmPOHist.lblStartDt.Create(Label,"Start",True,600,255,0,45,285,True,0,"Arial",8,-2147483633,0)
+Gui.frmPOHist.lblStartDt.Parent("frameDates")
+Gui.frmPOHist.lblEndDt.Create(Label,"End",True,435,255,0,45,840,True,0,"Arial",8,-2147483633,0)
+Gui.frmPOHist.lblEndDt.Parent("frameDates")
+Gui.frmPOHist.cboVendors.Create(ComboBox)
+Gui.frmPOHist.cboVendors.Size(2340,330)
+Gui.frmPOHist.cboVendors.Position(1605,825)
+Gui.frmPOHist.cmdRefresh.Create(Button)
+Gui.frmPOHist.cmdRefresh.Size(990,330)
+Gui.frmPOHist.cmdRefresh.Position(1605,1170)
+Gui.frmPOHist.cmdRefresh.Caption("REFRESH")
+Gui.frmPOHist.cmdRefresh.Event(Click,cmdRefresh_Click)
+Gui.frmPOHist.optOrderDt.Create(Option)
+Gui.frmPOHist.optOrderDt.Size(2175,255)
+Gui.frmPOHist.optOrderDt.Position(1605,15)
+Gui.frmPOHist.optOrderDt.Caption("Filter by Order Date")
+Gui.frmPOHist.optDueDt.Create(Option)
+Gui.frmPOHist.optDueDt.Size(2175,255)
+Gui.frmPOHist.optDueDt.Position(1605,285)
+Gui.frmPOHist.optDueDt.Caption("Filter by Due Date")
+Gui.frmPOHist.optReceiveDt.Create(Option)
+Gui.frmPOHist.optReceiveDt.Size(2175,255)
+Gui.frmPOHist.optReceiveDt.Position(1605,555)
+Gui.frmPOHist.optReceiveDt.Caption("Filter by Received Date")
+Gui.frmPOHist.lblStatus.Create(Label,"Label",False,2955,255,0,12225,990,True,0,"Arial",8,-2147483633,0)
+Gui.frmPOHist.lblStatus.Anchor(9)
+Gui.frmPOHist.pgbStatus.Create(ProgressBar)
+Gui.frmPOHist.pgbStatus.Visible(False)
+Gui.frmPOHist.pgbStatus.Size(2940,255)
+Gui.frmPOHist.pgbStatus.Position(12240,1215)
+Gui.frmPOHist.pgbStatus.Anchor(9)
+Gui.FrmWeb..Create
+Gui.FrmWeb..Size(4035,1695)
+Gui.FrmWeb..MinX(0)
+Gui.FrmWeb..MinY(0)
+Gui.FrmWeb..Position(0,0)
+Gui.FrmWeb..BackColor(-2147483633)
+Gui.FrmWeb..MousePointer(0)
+Gui.FrmWeb..Caption("Global Shop Solutions - Web Sites")
+Gui.FrmWeb..Event(UnLoad,FrmWeb_UnLoad)
+Gui.FrmWeb.cmdGSS.Create(Button)
+Gui.FrmWeb.cmdGSS.Size(3615,375)
+Gui.FrmWeb.cmdGSS.Position(120,45)
+Gui.FrmWeb.cmdGSS.Caption("Global Shop Solutions")
+Gui.FrmWeb.cmdGSS.Event(Click,cmdGSS_Click)
+Gui.FrmWeb.cmdSerV.Create(Button)
+Gui.FrmWeb.cmdSerV.Size(3615,375)
+Gui.FrmWeb.cmdSerV.Position(120,450)
+Gui.FrmWeb.cmdSerV.Caption("ServiceWeb")
+Gui.FrmWeb.cmdSerV.Event(Click,cmdServ_Click)
+Gui.FrmWeb.cmdUpd.Create(Button)
+Gui.FrmWeb.cmdUpd.Size(3615,375)
+Gui.FrmWeb.cmdUpd.Position(120,855)
+Gui.FrmWeb.cmdUpd.Caption("GSS Updates")
+Gui.FrmWeb.cmdUpd.Event(Click,cmdUpd_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+	V.Global.bLoadData.Declare
+	V.Global.bLongPart.Declare
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sIcon.Declare
+	V.Local.sGssLogo.Declare
+	V.Local.dStart.Declare
+	
+	F.Intrinsic.String.Build("{0}\gss2.ico",V.Caller.GasDir,V.Local.sIcon)
+	F.Intrinsic.String.Build("{0}\GAB_GSS_Logo_Green_Dash.png",V.Caller.GasDir,V.Local.sGssLogo)
+	Gui.frmPOHist..Icon(V.Local.sIcon)
+	Gui.frmWeb..Icon(V.local.sIcon)
+	Gui.frmPOHist.picGSSLogo.Picture(V.Local.sGssLogo)
+	
+	'Set Date to 1 yr back
+	F.Intrinsic.Date.DateAdd("YYYY",-1,V.Ambient.Date,V.Local.dStart)
+	Gui.frmPOHist.dtpStartDt.Value(V.Local.dStart)
+	
+	F.Intrinsic.Control.CallSub(SetAnchors)
+	F.Intrinsic.Control.CallSub(CheckLongPart)
+	
+	Gui.frmPOHist.optOrderDt.Value(True)
+	
+	Gui.frmPOHist..Show
+	F.Intrinsic.Control.CallSub(LoadComboBoxes)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.frmPOHist_UnLoad.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Intrinsic.Control.End
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.frmPOHist_UnLoad.End
+
+Program.Sub.SetAnchors.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	'0 - None
+	'1 - Top
+	'2 - Bottom
+	'4 - Left
+	'8 - Right
+	
+	Gui.frmPOHist.GsGCPOHist.Anchor(15)
+	Gui.frmPOHist.picGSSLogo.Anchor(1)
+	Gui.frmPOHist.frameDates.Anchor(5)
+	Gui.frmPOHist.cboVendors.Anchor(5)
+	Gui.frmPOHist.cmdRefresh.Anchor(5)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.SetAnchors.End
+
+Program.Sub.CheckLongPart.Start
+	F.Global.General.ReadOption("400861",0,False,"0000",V.Global.bLongPart)
+	F.Intrinsic.Control.If(V.Global.bLongPart,=,False)
+		F.Global.General.ReadOption("400861",0,False,"0004",V.Global.bLongPart)
+	F.Intrinsic.Control.EndIf
+Program.Sub.CheckLongPart.End
+
+Program.Sub.SetContextMenus.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	Gui.frmPOHist..ContextMenuCreate("ctxPOHist")
+	Gui.frmPOHist.GsGCPOHist.ContextMenuAttach("ctxPOHist")
+	Gui.frmPOHist..ContextMenuAddItem("ctxPOHist","Refresh",0,"Refresh")
+	Gui.frmPOHist..ContextMenuAddItem("ctxPOHist","Export",0,"Export")
+	Gui.frmPOHist..ContextMenuAddItem("ctxPOHist","ResetColumns",0,"Reset Columns")
+	Gui.frmPOHist..ContextMenuSetItemEventHandler("ctxPOHist","Refresh","MenuClickRefresh")
+	Gui.frmPOHist..ContextMenuSetItemEventHandler("ctxPOHist","Export","MenuClickExport")
+	Gui.frmPOHist..ContextMenuSetItemEventHandler("ctxPOHist","ResetColumns","MenuClickResetColumns")
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.SetContextMenus.End
+
+Program.Sub.MenuClickRefresh.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Intrinsic.Control.CallSub(cmdRefresh_Click)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.MenuClickRefresh.End
+
+Program.Sub.MenuClickExport.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sFileExport.Declare
+	V.Local.bExcel.Declare
+	V.Local.bFileLocked.Declare
+	V.Local.sMsg.Declare
+	
+	F.Automation.MSExcel.CheckPresence(V.Local.bExcel)
+	F.Intrinsic.Control.If(V.Local.bExcel)
+		F.Intrinsic.String.Build("{0}\GAB_4637_Export.xlsx",V.Caller.LocalGssTempDir,V.Local.sFileExport)
+		F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+		F.Intrinsic.Control.If(V.Local.bFileLocked)
+			F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+			F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+		F.Intrinsic.Control.Else
+			Gui.frmPOHist.GsGCPOHist.Export(V.Local.sFileExport,"xlsx")
+			F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("{0}\GAB_4637_Export.csv",V.Caller.LocalGssTempDir,V.Local.sFileExport)
+		F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+		F.Intrinsic.Control.If(V.Local.bFileLocked)
+			F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+			F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+		F.Intrinsic.Control.Else
+			Gui.frmPOHist.GsGCPOHist.Export(V.Local.sFileExport,"csv")
+		F.Intrinsic.Control.EndIf
+		F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.MenuClickExport.End
+
+Program.Sub.MenuClickResetColumns.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Intrinsic.Control.SelectCase(V.Args.MenuName)
+		F.Intrinsic.Control.Case("CTXPOHIST")
+			F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GVPOHIST",4708,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,"")
+			F.Intrinsic.Control.CallSub(LoadDtPOHist)
+	F.Intrinsic.Control.EndSelect
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.MenuClickResetColumns.End
+
+Program.Sub.LoadComboBoxes.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	Gui.frmPOHist.cmdRefresh.Enabled(False)
+	Gui.frmPOHist.lblStatus.Visible(True)
+	Gui.frmPOHist.pgbStatus.Visible(True)
+	Gui.frmPOHist.lblStatus.Caption("Loading Options....")
+	Gui.frmPOHist.pgbStatus.Min(0)
+	Gui.frmPOHist.pgbStatus.Max(100)
+	Gui.frmPOHist.pgbStatus.Value(25)
+	
+	F.ODBC.Connection!con.OpenCompanyConnection(300)
+	
+	'Vendors
+	F.Data.DataTable.CreateFromSQL("dtVendor","con","Select ' All Vendors' As Name_Vendor Union Select Name_Vendor From Vendor_Master Where Rec = 1;",True)
+	Gui.frmPOHist.cboVendors.AddItems("DataTable","dtVendor","Name_Vendor","Name_Vendor")
+	Gui.frmPOHist.cboVendors.Text(" All Vendors")
+	F.Data.DataTable.Close("dtVendor")
+	Gui.frmPOHist.pgbStatus.Value(50)
+	
+	F.ODBC.Connection!con.Close
+	
+	Gui.frmPOHist.pgbStatus.Value(100)
+	Gui.frmPOHist.cmdRefresh.Enabled(True)
+	Gui.frmPOHist.lblStatus.Visible(False)
+	Gui.frmPOHist.pgbStatus.Visible(False)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry	
+Program.Sub.LoadComboBoxes.End
+
+Program.Sub.cmdRefresh_Click.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Intrinsic.Control.If(V.Global.bLoadData)
+		F.Intrinsic.Control.CallSub(Serialize)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.CallSub(LoadDtPOHist)
+	F.Intrinsic.Control.CallSub(Deserialize)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmdRefresh_Click.End
+
+Program.Sub.LoadDtPOHist.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSQL.Declare
+	V.Local.dStart.Declare
+	V.Local.dEnd.Declare
+	V.Local.sFilter.Declare
+	V.Local.sWhereDate.Declare
+	V.Local.sVendor.Declare
+	V.Local.iCnt.Declare
+	V.Local.iCnt2.Declare
+	V.Local.sExp.Declare
+	V.Local.sSelect.Declare
+	V.Local.fOpenQty.Declare
+	V.Local.fPrevQty.Declare
+	V.Local.fRecvRej.Declare
+	
+	Gui.frmPOHist.cmdRefresh.Enabled(False)
+	Gui.frmPOHist.lblStatus.Visible(True)
+	Gui.frmPOHist.pgbStatus.Visible(True)
+	Gui.frmPOHist.lblStatus.Caption("Loading PO History Data....")
+	Gui.frmPOHist.pgbStatus.Min(0)
+	Gui.frmPOHist.pgbStatus.Max(100)
+	Gui.frmPOHist.pgbStatus.Value(15)
+	
+	V.Local.dStart.Set(V.Screen.frmPOHist!dtpStartDt.Value)
+	V.Local.dEnd.Set(V.Screen.frmPOHist!dtpEndDt.Value)
+	
+	F.ODBC.Connection!con.OpenCompanyConnection(300)
+	
+	F.Intrinsic.Control.If(V.DataTable.dtPOHist.Exists)
+		F.Data.DataTable.Close("dtPOHist")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.If(V.Global.bLoadData,=,False)
+		F.Intrinsic.Control.CallSub(SetContextMenus)
+	F.Intrinsic.Control.EndIf
+	
+	V.Global.bLoadData.Set(True)
+	
+	F.Intrinsic.Control.If(V.Screen.frmPOHist!optOrderDt.Value)
+		V.Local.sWhereDate.Set("A.Date_PO")
+	F.Intrinsic.Control.ElseIf(V.Screen.frmPOHist!optDueDt.Value)
+		V.Local.sWhereDate.Set("A.Date_Due")
+	F.Intrinsic.Control.ElseIf(V.Screen.frmPOHist!optReceiveDt.Value)
+		V.Local.sWhereDate.Set("A.Date_Received")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("Select A.Purchase_Order,Left(A.PO_Line,3) As PO_Line,B.Name_Vendor,A.Buyer,Coalesce(A.Part,'') AS Part,'' As Display_Part,A.Location,A.Description,A.Qty_Order,A.Qty_Recd_Not_Insp,A.Qty_Received,A.Qty_Reject, Cast(0 As Numeric(14,4)) As Remaining,A.Cost,Case When A.Date_PO = '1900-01-01' Then Null Else A.Date_PO End As Date_PO,Case When A.Date_Due = '1900-01-01' Then Null Else A.Date_Due End As Date_Due,Case When A.Date_Received = '1900-01-01' Then Null Else A.Date_Received End As Date_Received,A.UM_Inventory,A.Product_Line,A.Job,A.Suffix,RTrim(A.GL_Account) As GL_Account,A.Receiver_No,C.Code_Sort,D.Project as Project,D.Phase as Phase From V_PO_History A Left Join V_Vendor_Master B ON A.Vendor = B.Vendor Left Join V_Inventory_Mstr C On A.Part = C.Part And A.Location = C.Location Left Join V_JOB_HEADER D on A.JOB=D.JOB AND A.SUFFIX=D.SUFFIX Where {0} Between '{1}' And '{2}' Order By A.Purchase_Order, PO_Line, A.Date_Received, A.PO_Time;",V.Local.sWhereDate,V.Local.dStart.PervasiveDate,V.Local.dEnd.PervasiveDate,V.Local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtPOHist1","con",V.Local.sSQL,True)
+	F.Data.DataTable.AddDisplayPartColumn("dtPOHist1",0,"Part","Display_Part")
+	Gui.frmPOHist.pgbStatus.Value(25)
+	
+	'Set Remaining Open Qtys
+	F.Data.DataView.Create("dtPOHist1","dvOpenQty")
+	F.Data.DataView.ToDataTableDistinct("dtPOHist1","dvOpenQty","dtOpenQty","Purchase_Order*!*PO_Line",True)
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtOpenQty.RowCount--,1)
+		F.Intrinsic.String.Build("Purchase_Order = '{0}' And PO_Line = '{1}'",V.DataTable.dtOpenQty(V.Local.iCnt).Purchase_Order!FieldVal,V.DataTable.dtOpenQty(V.Local.iCnt).PO_Line!FieldVal,V.Local.sExp)
+		F.Data.DataTable.Select("dtPOHist1",V.Local.sExp,V.Local.sSelect)
+		F.Intrinsic.Control.If(V.Local.sSelect.IsNotNoReturn)
+			V.Local.fRecvRej.Set(0)
+			V.Local.fPrevQty.Set(0)
+			V.Local.fOpenQty.Set(0)
+			F.Intrinsic.String.Split(V.Local.sSelect,"*!*",V.Local.sSelect)
+			F.Intrinsic.Control.For(V.Local.iCnt2,0,V.Local.sSelect.UBound,1)
+				F.Intrinsic.Math.Add(V.DataTable.dtPOHist1(V.Local.sSelect(V.Local.iCnt2)).Qty_Received!FieldVal,V.DataTable.dtPOHist1(V.Local.sSelect(V.Local.iCnt2)).Qty_Reject!FieldVal,V.Local.fRecvRej)
+				F.Intrinsic.Control.If(V.Local.iCnt2,=,0)
+					F.Intrinsic.Math.Sub(V.DataTable.dtPOHist1(V.Local.sSelect(V.Local.iCnt2)).Qty_Order!FieldVal,V.Local.fRecvRej,V.Local.fOpenQty)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.Sub(V.Local.fPrevQty,V.Local.fRecvRej,V.Local.fOpenQty)
+				F.Intrinsic.Control.EndIf
+				F.Data.DataTable.SetValue("dtPOHist1",V.Local.sSelect(V.Local.iCnt2),"Remaining",V.Local.fOpenQty)
+				V.Local.fPrevQty.Set(V.Local.fOpenQty)
+			F.Intrinsic.Control.Next(V.Local.iCnt2)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	F.Data.DataView.Close("dtPOHist1","dvOpenQty")
+	F.Data.DataTable.Close("dtOpenQty")
+	
+	'Orig_Due_Date
+	F.Data.DataTable.AddColumn("dtPOHist1","OrigDueDate",Date)
+	F.Data.DataTable.AddExpressionColumn("dtPOHist1","POLineKey",String,"Purchase_Order+PO_Line")
+	F.Data.Dictionary.CreateFromSQL("dOrigDueDate","con","Select Purchase_Order+Left(Record_No,3) As POLine, Orig_Due_Date From V_PO_Lines Where Orig_Due_Date <> '1900-01-01' Union Select Purchase_Order+Left(Line,3) As POLine, Orig_Due_Date From V_POHist_Lines Where Orig_Due_Date <> '1900-01-01' Order By POLine;")
+	F.Data.Dictionary.SetDefaultReturn("dOrigDueDate",01/01/1900)
+	F.Data.DataTable.FillFromDictionary("dtPOHist1","dOrigDueDate","POLineKey","OrigDueDate")
+	F.Data.Dictionary.Close("dOrigDueDate")
+	F.Data.DataTable.RemoveColumn("dtPOHist1","POLineKey")
+	
+	'Specific Vendor
+	F.Intrinsic.Control.If(V.Screen.frmPOHist!cboVendors.Value,<>," All Vendors")
+		F.Intrinsic.String.Replace(V.Screen.frmPOHist!cboVendors.Value,"'","''",V.Local.sVendor)
+		F.Intrinsic.String.Build("Name_Vendor = '{0}'",V.Local.sVendor,V.Local.sFilter)
+	F.Intrinsic.Control.EndIf
+	
+	'Create DataView
+	F.Data.DataView.Create("dtPOHist1","dvPOHist",22,V.Local.sFilter,"")
+	F.Data.DataView.ToDataTable("dtPOHist1","dvPOHist","dtPOHist",True)
+	F.Data.DataTable.Close("dtPOHist1")
+	Gui.frmPOHist.pgbStatus.Value(50)
+	
+	F.ODBC.Connection!con.Close
+	
+	Gui.frmPOHist.pgbStatus.Value(75)
+	F.Intrinsic.Control.CallSub(LoadGvPOHist)
+	Gui.frmPOHist.pgbStatus.Value(90)
+	
+	Gui.frmPOHist.pgbStatus.Value(100)
+	Gui.frmPOHist.cmdRefresh.Enabled(True)
+	Gui.frmPOHist.lblStatus.Visible(False)
+	Gui.frmPOHist.pgbStatus.Visible(False)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.LoadDtPOHist.End
+
+Program.Sub.LoadGvPOHist.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	Gui.frmPOHist.GsGCPOHist.SuspendLayout()
+	Gui.frmPOHist.GsGCPOHist.AddGridviewFromDatatable("gvPOHist","dtPOHist")
+	Gui.frmPOHist.GsGCPOHist.SetGridviewProperty("gvPOHist","MultiSelect",True)
+	Gui.frmPOHist.GsGCPOHist.SetGridviewProperty("gvPOHist","Editable",False)
+	Gui.frmPOHist.GsGCPOHist.SetGridviewProperty("gvPOHist","AllowSort",True)
+	Gui.frmPOHist.GsGCPOHist.SetGridviewProperty("gvPOHist","AllowFilter",True)
+	Gui.frmPOHist.GsGCPOHist.setGridViewProperty("gvPOHist","OptionsDetailShowDetailTabs",False)
+	Gui.frmPOHist.GsGCPOHist.SetGridViewProperty("gvPOHist","OptionsMenuShowAutoFilterRowItem",False)
+	Gui.frmPOHist.GsGCPOHist.SetGridviewProperty("gvPOHist","OptionsViewShowGroupPanel",True)
+	Gui.frmPOHist.GsGCPOHist.SetGridViewProperty("gvPOHist","OptionsFilterUseNewCustomFilterDialog",True)
+	Gui.frmPOHist.GsGCPOHist.SetGridViewProperty("gvPOHist","EnableAppearanceOddRow",True)
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Part","Visible",False)
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Purchase_Order","VisibleIndex","0")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PO_Line","VisibleIndex","1")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Name_Vendor","VisibleIndex","2")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Buyer","VisibleIndex","3")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Display_Part","VisibleIndex","4")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Location","VisibleIndex","5")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Description","VisibleIndex","6")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Order","VisibleIndex","7")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Recd_Not_Insp","VisibleIndex","8")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Received","VisibleIndex","9")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Reject","VisibleIndex","10")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Remaining","VisibleIndex","11")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Cost","VisibleIndex","12")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_PO","VisibleIndex","13")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Due","VisibleIndex","14")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Received","VisibleIndex","15")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","UM_Inventory","VisibleIndex","16")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Product_Line","VisibleIndex","17")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Job","VisibleIndex","18")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Suffix","VisibleIndex","19")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","GL_Account","VisibleIndex","20")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Receiver_No","VisibleIndex","21")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Project","VisibleIndex","22")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Phase","VisibleIndex","23")
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Purchase_Order","Caption","PO Number")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PO_Line","Caption","PO Line")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Name_Vendor","Caption","Vendor")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Buyer","Caption","Buyer")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Display_Part","Caption","Part Number")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Location","Caption","Loc")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Description","Caption","Description")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Order","Caption","Order Qty")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Recd_Not_Insp","Caption","Not Insp")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Received","Caption","Received")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Reject","Caption","Rejected")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Remaining","Caption","Open")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Cost","Caption","Unit Cost")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_PO","Caption","Order Date")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Due","Caption","Due Date")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Received","Caption","Received Date")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","UM_Inventory","Caption","UM Inv")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Product_Line","Caption","PL")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Job","Caption","Job")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Suffix","Caption","Suffix")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","GL_Account","Caption","GL Account")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Receiver_No","Caption","Receiver Number")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","OrigDueDate","Caption","Orig Due Date")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Code_Sort","Caption","Sort Code")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PROJECT","Caption","Project")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PHASE","Caption","Phase")
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Purchase_Order","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PO_Line","MinWidth","50")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Name_Vendor","MinWidth","180")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Buyer","MinWidth","55")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Display_Part","MinWidth","140")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Location","MinWidth","40")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Description","MinWidth","195")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Order","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Recd_Not_Insp","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Received","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Reject","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Remaining","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Cost","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_PO","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Due","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Received","MinWidth","95")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","UM_Inventory","MinWidth","65")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Product_Line","MinWidth","35")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Job","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Suffix","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","GL_Account","MinWidth","85")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Receiver_No","MinWidth","120")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","OrigDueDate","MinWidth","90")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Code_Sort","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Project","MinWidth","80")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Phase","MinWidth","80")
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Purchase_Order","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PO_Line","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Name_Vendor","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Buyer","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Display_Part","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Location","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Description","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Order","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Recd_Not_Insp","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Received","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Reject","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Remaining","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Cost","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_PO","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Due","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Received","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","UM_Inventory","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Product_Line","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Job","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Suffix","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","GL_Account","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Receiver_No","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","OrigDueDate","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Code_Sort","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Project","HeaderFontBold",True)
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Phase","HeaderFontBold",True)
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Purchase_Order","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PO_Line","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Name_Vendor","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Buyer","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Display_Part","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Location","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Description","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Order","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Recd_Not_Insp","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Received","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Reject","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Remaining","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Cost","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_PO","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Due","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Received","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","UM_Inventory","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Product_Line","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Job","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Suffix","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","GL_Account","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Receiver_No","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","OrigDueDate","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Code_Sort","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Project","HeaderHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Phase","HeaderHAlignment","Center")
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Purchase_Order","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","PO_Line","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Buyer","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Location","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","UM_Inventory","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Product_Line","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Receiver_No","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_PO","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Due","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Received","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Job","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Suffix","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","GL_Account","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Receiver_No","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","OrigDueDate","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Code_Sort","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Project","CellHAlignment","Center")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Phase","CellHAlignment","Center")
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Purchase_Order","CellForeColor","Blue")
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_PO","DisplayCustomDateTime","d")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Due","DisplayCustomDateTime","d")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Date_Received","DisplayCustomDateTime","d")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","OrigDueDate","DisplayCustomDateTime","d")
+	
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Order","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Recd_Not_Insp","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Received","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Qty_Reject","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Remaining","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","Cost","DisplayCustomNumeric","#,###,###,##0.00")
+	
+	F.Intrinsic.Control.If(V.Global.bLongPart)
+		Gui.frmPOHist.GsGCPOHist.SetColumnProperty("gvPOHist","DISPLAY_PART","MinWidth","250")
+	F.Intrinsic.Control.EndIf
+	
+	Gui.frmPOHist.GsGCPOHist.ResumeLayout()
+	Gui.frmPOHist.GsGCPOHist.MainView("gvPOHist")
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.LoadGvPOHist.End
+
+Program.Sub.GsGCPOHist_RowCellClick.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sParams.Declare
+	
+	F.Intrinsic.Control.If(V.Args.Column,=,"Purchase_Order",OR,V.Args.Column,=,"PURCHASE_ORDER")
+		F.Intrinsic.String.Build("V!*!{0}!*!",V.Args.CellValue,V.Local.sParams)
+		F.Global.General.CallWrapperAsync(175200,V.Local.sParams)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.GsGCPOHist_RowCellClick.End
+
+Program.Sub.Serialize.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'gvPOHist
+	Gui.frmPOHist.GsGCPOHist.Serialize("gvPOHist",V.Local.sSerialize)
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GVPOHIST",4708,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'gvPOHist
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GVPOHIST",4708,1000,6,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize.Trim,<>,"")
+		Gui.frmPOHist.GsGCPOHist.Deserialize(V.Local.sSerialize)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.picGSSLogo_DblClick.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	Gui.frmWeb..Show
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.picGSSLogo_DblClick.End
+
+Program.Sub.cmdGSS_Click.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Intrinsic.Task.ShellExec(0,"Open","http://www.globalshopsolutions.com/","","",0)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmdGSS_Click.End
+
+Program.Sub.cmdServ_Click.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Intrinsic.Task.ShellExec(0,"Open","http://gss-service.com/","","",0)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmdServ_Click.End
+
+Program.Sub.cmdUpd_Click.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Intrinsic.Task.ShellExec(0,"Open","http://gss-updates.com/","","",0)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmdUpd_Click.End
+
+Program.Sub.frmWeb_Unload.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	Gui.frmWeb..Visible(False)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.frmWeb_Unload.End
+
+Program.Sub.Comments.Start
+${$5$}$2.0.0.0$}$2
+${$6$}$bstevens$}$20230223095057968$}$3Pg7+K2MGztoXyjxMVZqWaM5g3GOUsSNmE89BxAsd2tJdQOccO5twmtT5uJXF+WJ8i2fJEPh4TeiGQbf4QvbyQ==
+Program.Sub.Comments.End
